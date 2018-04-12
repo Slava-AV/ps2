@@ -77,8 +77,17 @@ def get_guessed_word(secret_word, letters_guessed):
       which letters in secret_word have been guessed so far.
     '''
     # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
-
+    outputStr = secret_word[0]
+    i = 1
+    while i < len(secret_word):
+        if secret_word[i] in letters_guessed:
+            outputStr = outputStr + secret_word[i]
+            i=i+1
+        else:
+            outputStr = outputStr + " _"
+            i=i+1
+    outputStr = outputStr + secret_word[-1]
+    return outputStr
 
 
 def get_available_letters(letters_guessed):
@@ -207,9 +216,10 @@ if __name__ == "__main__":
     
     secret_word = choose_word(wordlist)
     hangman(secret_word)
-    letters_guessed = ['a','b','c','d','e','f','g','h','y','j','l', 'i', 'k', 'p', 'r', 's']
+    letters_guessed = ['y','j','l', 'i', 'k', 'p', 'r', 's']
     print(secret_word)
     print(is_word_guessed(secret_word, letters_guessed))
+    print(get_guessed_word(secret_word,letters_guessed))
 
 ###############
     
