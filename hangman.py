@@ -217,14 +217,19 @@ if __name__ == "__main__":
 
     # To test part 2, comment out the pass line above and
     # uncomment the following two lines.
-    
+    guessesLeft = 6
     secret_word = choose_word(wordlist)
     hangman(secret_word)
     letters_guessed = ['y','j','l', 'i', 'k', 'p', 'r', 's']
-    print(secret_word)
-    print(is_word_guessed(secret_word, letters_guessed))
-    print(get_guessed_word(secret_word,letters_guessed))
-    print(get_available_letters(letters_guessed))
+    # print(secret_word)
+    # print(is_word_guessed(secret_word, letters_guessed))
+    # print(get_guessed_word(secret_word,letters_guessed))
+    # print(get_available_letters(letters_guessed))
+    print("Welcome to the game Hangman!")
+    print("I am thinking of a word that is " + str(len(secret_word)) + " long")
+    print("_____________")
+    print("You have " + str(guessesLeft) + " left")
+    print("Available letters:" + get_available_letters(letters_guessed))
 ###############Z
     
     # To test part 3 re-comment out the above lines and 
