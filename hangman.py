@@ -79,7 +79,7 @@ def get_guessed_word(secret_word, letters_guessed):
     # FILL IN YOUR CODE HERE AND DELETE "pass"
     outputStr = secret_word[0]
     i = 1
-    while i < len(secret_word):
+    while i < len(secret_word)-1:
         if secret_word[i] in letters_guessed:
             outputStr = outputStr + secret_word[i]
             i=i+1
@@ -97,8 +97,12 @@ def get_available_letters(letters_guessed):
       yet been guessed.
     '''
     # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
-    
+    allLetters = string.ascii_lowercase
+    outputStr = ""
+    for i in range(len(allLetters)):
+        if allLetters[i] not in letters_guessed:
+            outputStr = outputStr + allLetters[i]
+    return outputStr
     
 
 def hangman(secret_word):
@@ -220,8 +224,8 @@ if __name__ == "__main__":
     print(secret_word)
     print(is_word_guessed(secret_word, letters_guessed))
     print(get_guessed_word(secret_word,letters_guessed))
-
-###############
+    print(get_available_letters(letters_guessed))
+###############Z
     
     # To test part 3 re-comment out the above lines and 
     # uncomment the following two lines. 
