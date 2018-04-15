@@ -1,7 +1,7 @@
 import random
 import string
 
-WORDLIST_FILENAME = "words_ru.txt"
+WORDLIST_FILENAME = "words.txt"
 class bcolors:
     HEADER = '\033[95m'
     BLUE = '\033[94m'
@@ -40,15 +40,7 @@ def choose_word(wordlist):
     """
     return random.choice(wordlist)
 
-wordlist = """муравей бабуин барсук медведь бобр верблюд
-кошка моллюск кобра пума койот ворона олень собака осел
-утка орел хорек лиса лягушка коза гусь ястреб ящерица лама
-моль обезьяна лось мышь мул тритон выдра сова панда попугай
-голубь питон кролик баран крыса носорог лосось акула змея
-паук аист лебедь тигр жаба форель индейка черепаха ласка
-кит волк вомбат зебра""".split()
-russian = 'абвгдеёжзиклмнопрстуфхцчъыьэюя'
-
+wordlist = load_words()
 
 def is_word_guessed(secret_word, letters_guessed):
     '''
@@ -93,11 +85,11 @@ def get_available_letters(letters_guessed):
     returns: string (of letters), comprised of letters that represents which letters have not
       yet been guessed.
     '''
-    # allLetters = string.ascii_lowercase
+    allLetters = string.ascii_lowercase
     outputStr = ""
-    for i in range(len(russian)):
-        if russian[i] not in letters_guessed:
-            outputStr = outputStr + " " + russian[i]
+    for i in range(len(allLetters)):
+        if allLetters[i] not in letters_guessed:
+            outputStr = outputStr + " " + allLetters[i]
     return outputStr
     
 
