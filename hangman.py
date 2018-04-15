@@ -1,7 +1,16 @@
 import random
 import string
 
-WORDLIST_FILENAME = "words.txt"
+WORDLIST_FILENAME = "words_ru.txt"
+class bcolors:
+    HEADER = '\033[95m'
+    BLUE = '\033[94m'
+    GREEN = '\033[92m'
+    RED = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
 
 
 def load_words():
@@ -31,13 +40,14 @@ def choose_word(wordlist):
     """
     return random.choice(wordlist)
 
-# end of helper code
-
-# -----------------------------------
-
-# Load the list of words into the variable wordlist
-# so that it can be accessed from anywhere in the program
-wordlist = load_words()
+wordlist = """муравей бабуин барсук медведь бобр верблюд
+кошка моллюск кобра пума койот ворона олень собака осел
+утка орел хорек лиса лягушка коза гусь ястреб ящерица лама
+моль обезьяна лось мышь мул тритон выдра сова панда попугай
+голубь питон кролик баран крыса носорог лосось акула змея
+паук аист лебедь тигр жаба форель индейка черепаха ласка
+кит волк вомбат зебра""".split()
+russian = 'абвгдеёжзиклмнопрстуфхцчъыьэюя'
 
 
 def is_word_guessed(secret_word, letters_guessed):
@@ -65,7 +75,6 @@ def get_guessed_word(secret_word, letters_guessed):
     returns: string, comprised of letters, underscores (_), and spaces that represents
       which letters in secret_word have been guessed so far.
     '''
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
     i = 0
     outputStr = ""
     while i < len(secret_word):
@@ -84,12 +93,11 @@ def get_available_letters(letters_guessed):
     returns: string (of letters), comprised of letters that represents which letters have not
       yet been guessed.
     '''
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
-    allLetters = string.ascii_lowercase
+    # allLetters = string.ascii_lowercase
     outputStr = ""
-    for i in range(len(allLetters)):
-        if allLetters[i] not in letters_guessed:
-            outputStr = outputStr + allLetters[i]
+    for i in range(len(russian)):
+        if russian[i] not in letters_guessed:
+            outputStr = outputStr + " " + russian[i]
     return outputStr
     
 
@@ -118,28 +126,28 @@ def hangman(secret_word):
     
     Follows the other limitations detailed in the problem write-up.
     '''
-    guessesLeft = 6
-    print("I am thinking of a word that is " + str(len(secret_word)) + " long")
+    guessesLeft = 10
+    print(bcolors.BLUE + "I am thinking of a word that is " + str(len(secret_word)) + " letters long" +bcolors.ENDC)
     letters_guessed = ""
     while guessesLeft > 0:
-        print("_____________")
-        print("You have " + str(guessesLeft) + " left")
+        # print("_____________")
+        print("You have " + str(guessesLeft) + " guesses left")
         print("Available letters:" + get_available_letters(letters_guessed))
         newLetter = input("Guess a letter:")
         letters_guessed = letters_guessed + newLetter
         if newLetter in secret_word:
             if get_guessed_word(secret_word,letters_guessed) == secret_word:
-                print("Congratulations, you won! My word was: " + secret_word)
+                print(bcolors.HEADER + "Congratulations, you won! My word was: " + secret_word + bcolors.ENDC)
                 break
             else:
                 letters_guessed = letters_guessed + newLetter
-                print("Good guess: " + get_guessed_word(secret_word, letters_guessed))
+                print(bcolors.HEADER + "Good guess: " + get_guessed_word(secret_word, letters_guessed) + bcolors.ENDC)
         else:
-            print("Oops! That letter is not in my word: " + get_guessed_word(secret_word, letters_guessed))
+            print(bcolors.RED + "Oops! That letter is not in my word: " + get_guessed_word(secret_word, letters_guessed) + bcolors.ENDC)
         guessesLeft = guessesLeft - 1
 
     if get_guessed_word(secret_word,letters_guessed) != secret_word:
-        print("Sorry, you ran out of guesses. The word was: " + secret_word)
+        print(bcolors.FAIL + "Sorry, you ran out of guesses. The word was: " + secret_word +bcolors.ENDC)
 
 
 
@@ -205,13 +213,8 @@ def hangman_with_hints(secret_word):
 
 
 if __name__ == "__main__":
-    # secret_word = choose_word(wordlist)
-    print("Welcome to the game Hangman!")
-    secret_word = "apple"
+    secret_word = choose_word(wordlist)
+    print(bcolors.BLUE + "Welcome to the game Hangman!" +bcolors.ENDC)
+    # secret_word = "apple"
     hangman(secret_word)
-    # letters_guessed = ['y','j','l', 'i', 'k', 'p', 'r', 's']
-    # print(secret_word)
-    # print(is_word_guessed(secret_word, letters_guessed))
-    # print(get_guessed_word(secret_word,letters_guessed))
-    # print(get_available_letters(letters_guessed))
     #hangman_with_hints(secret_word)
